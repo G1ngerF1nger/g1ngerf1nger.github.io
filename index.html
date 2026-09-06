@@ -131,6 +131,7 @@
   .lp-scroller::-webkit-scrollbar-thumb{background:#3a3a42;border-radius:8px}
   .lp-scroller img{width:100%;max-width:360px;height:auto;border-radius:12px;border:1px solid var(--line);cursor:zoom-in;transition:.25s}
   .lp-scroller img:hover{border-color:var(--a2);transform:translateY(-3px)}
+  .lp-more{display:none}
   .lb{position:fixed;inset:0;background:rgba(6,6,8,.94);display:none;align-items:center;justify-content:center;padding:28px;z-index:200;cursor:zoom-out}
   .lb.open{display:flex}
   .lb img{max-width:94vw;max-height:94vh;border-radius:10px;box-shadow:0 30px 90px rgba(0,0,0,.7)}
@@ -179,7 +180,10 @@
     .about p,.project p{font-size:15.5px}
     .logo-item{width:188px;height:84px;padding:8px 16px}
     .worked-lane{height:116px}
-    .lp-scroller{height:auto;max-height:none;overflow:visible}
+    .lp-scroller{height:auto;max-height:420px;overflow:hidden;position:relative}
+    .lp-scroller.lp-open{max-height:none}
+    .lp-scroller:not(.lp-open)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:72px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+    .lp-more{display:block;width:fit-content;margin:16px auto 0;padding:11px 22px;font-family:var(--grotesk);font-weight:600;font-size:14px;color:var(--a2);background:rgba(255,122,61,.08);border:1px solid var(--a2);border-radius:12px;cursor:pointer}
     .lp-scroller img{max-width:100%}
     footer h2{font-size:54px}
     .lb{padding:14px}
@@ -576,25 +580,31 @@
     const ok=form.querySelector('.formmsg.ok'), err=form.querySelector('.formmsg.err');
     const btn=form.querySelector('button[type=submit]');
     const hp=form.querySelector('[name="_honey"]');
+    const ifr=document.createElement('iframe');
+    ifr.name='ff_target'; ifr.style.display='none'; ifr.setAttribute('title','form target');
+    document.body.appendChild(ifr);
+    form.setAttribute('target','ff_target');
+    form.setAttribute('action','https://formsubmit.co/'+EM);
+    if(!form.querySelector('[name="_captcha"]')){
+      const c=document.createElement('input'); c.type='hidden'; c.name='_captcha'; c.setAttribute('value','false'); form.appendChild(c);
+    }
     const t0=Date.now();
-    form.addEventListener('submit',async e=>{
-      e.preventDefault();
+    let sending=false, prev='', to=0;
+    form.addEventListener('submit',function(e){
       if(ok) ok.hidden=true; if(err) err.hidden=true;
-      if(!form.reportValidity()) return;               // localized native validation
-      if(hp && hp.value) return;                        // honeypot filled -> bot
-      if(Date.now()-t0 < 2000){ if(err) err.hidden=false; return; } // too fast -> bot
-      const prev=btn.textContent, rtl=document.documentElement.dir==='rtl';
-      btn.disabled=true; btn.textContent=rtl?'\u05e9\u05d5\u05dc\u05d7\u2026':'Sending\u2026';
-      const ctrl=new AbortController();
-      const to=setTimeout(()=>ctrl.abort(),12000);   // don't hang if the network stalls
-      try{
-        const r=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(EM),
-          {method:'POST',headers:{'Accept':'application/json'},body:new FormData(form),signal:ctrl.signal});
-        const j=await r.json().catch(()=>({}));
-        if(r.ok && (j.success===true||j.success==='true')){ form.reset(); if(ok) ok.hidden=false; }
-        else if(err){ err.hidden=false; }
-      }catch(_){ if(err) err.hidden=false; }
-      finally{ clearTimeout(to); btn.disabled=false; btn.textContent=prev; }
+      if(!form.reportValidity()){ e.preventDefault(); return; }
+      if(hp && hp.value){ e.preventDefault(); return; }
+      if(Date.now()-t0 < 2000){ e.preventDefault(); if(err) err.hidden=false; return; }
+      prev=btn.textContent; btn.disabled=true;
+      btn.textContent=(document.documentElement.dir==='rtl')?'\u05e9\u05d5\u05dc\u05d7\u2026':'Sending\u2026';
+      sending=true;
+      to=setTimeout(function(){ if(sending){ sending=false; if(err) err.hidden=false; btn.disabled=false; btn.textContent=prev; } },15000);
+    });
+    ifr.addEventListener('load',function(){
+      if(!sending) return;
+      sending=false; clearTimeout(to);
+      form.reset(); if(ok) ok.hidden=false;
+      btn.disabled=false; btn.textContent=prev;
     });
   })();
   (function(){
@@ -602,6 +612,20 @@
     if(!t||!n) return;
     t.addEventListener('click',()=>{const o=n.classList.toggle('open'); t.setAttribute('aria-expanded',o?'true':'false');});
     n.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>{n.classList.remove('open'); t.setAttribute('aria-expanded','false');}));
+  })();
+  (function(){
+    const sc=document.querySelector('.lp-scroller'); if(!sc) return;
+    const btn=document.createElement('button');
+    btn.type='button'; btn.className='lp-more'; btn.setAttribute('aria-expanded','false');
+    const label=function(){ const he=document.documentElement.dir==='rtl';
+      btn.textContent = sc.classList.contains('lp-open')
+        ? (he?'\u05d4\u05e6\u05d2\u05d4 \u05de\u05e6\u05d5\u05de\u05e6\u05de\u05ea':'Show less')
+        : (he?'\u05d4\u05e6\u05d2\u05ea \u05db\u05dc \u05d3\u05e4\u05d9 \u05d4\u05e0\u05d7\u05d9\u05ea\u05d4':'Show all landing pages'); };
+    label();
+    btn.addEventListener('click',function(){ const o=sc.classList.toggle('lp-open'); btn.setAttribute('aria-expanded',o?'true':'false'); label();
+      if(!o) btn.scrollIntoView({behavior:'smooth',block:'center'}); });
+    sc.insertAdjacentElement('afterend',btn);
+    const lt=document.getElementById('langtoggle'); if(lt) lt.addEventListener('click',function(){ setTimeout(label,0); });
   })();
 </script>
 </body>
