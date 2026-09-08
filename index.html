@@ -23,7 +23,7 @@
 <style>
   :root{
     --bg:#0a0a0b; --bg2:#101012; --card:#141416; --line:#26262c;
-    --text:#f4f4f5; --muted:#8a8a92; --dim:#87878f;
+    --text:#f4f4f5; --muted:#b3b4bd; --dim:#87878f;
     --a1:#ffb45c; --a2:#ff7a3d;
     --grad:linear-gradient(100deg,var(--a1),var(--a2));
     --grotesk:'Space Grotesk',system-ui,sans-serif; --sans:'Inter',system-ui,sans-serif;
@@ -153,14 +153,15 @@
   h1 span:nth-child(1){animation-delay:.15s}
   h1 span:nth-child(2){animation-delay:.30s}
   h1 span:nth-child(3){animation-delay:.45s}
-  .lead{max-width:640px;color:var(--muted);font-size:clamp(17px,2vw,22px);margin-top:34px;opacity:0;animation:rise 1s 2.7s forwards}
+  .lead{max-width:640px;color:var(--text);font-size:clamp(18px,2vw,23px);margin-top:34px;opacity:0;animation:rise 1s 2.7s forwards}
   .cta{display:flex;gap:14px;flex-wrap:nowrap;margin-top:42px;opacity:0;animation:rise 1s 2.9s forwards}
   .btn{font-family:var(--grotesk);font-weight:600;font-size:14px;padding:14px 26px;border-radius:12px;border:1px solid var(--line);color:var(--text);transition:.25s;background:rgba(255,255,255,.02)}
   .btn:hover{border-color:var(--a2);color:var(--a2);transform:translateY(-2px)}
   .btn.primary{background:var(--grad);color:#08080a;border-color:transparent}
   .btn.primary:hover{color:#08080a;filter:brightness(1.08);transform:translateY(-2px)}
-  .scrollcue{position:relative;z-index:2;text-align:center;margin:20px 0 4px;color:var(--dim);font-size:12px;letter-spacing:3px;text-transform:uppercase;font-family:var(--grotesk)}
-  .scrollcue span{display:block;text-align:center;margin-top:8px;animation:bob 1.8s infinite}
+  .scrollcue{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;margin:46px 0 4px;color:var(--a2);font-size:14px;letter-spacing:4px;text-transform:uppercase;font-family:var(--grotesk);font-weight:600}
+  .scrollcue span{display:block;text-align:center}
+  .scrollcue span:last-child{font-size:24px;line-height:1;animation:bob 1.6s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
   @keyframes rise{to{opacity:1;transform:none}}
 
@@ -169,7 +170,7 @@
   .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:center;width:100%}
   .about-photo img{width:100%;max-width:330px;border-radius:20px;display:block;border:1px solid var(--line);margin-left:auto}
   @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:34px}.about-photo img{max-width:260px;margin:0}}
-  .about p{color:var(--muted);font-size:18px;max-width:760px;margin-top:22px}
+  .about p{color:var(--muted);font-size:19px;max-width:760px;margin-top:22px}
   .chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
 
   .project{}
@@ -193,7 +194,9 @@
   .num{font-family:var(--grotesk);color:var(--dim);font-size:16px;font-weight:600;margin-bottom:12px}
   .pcat{font-family:var(--grotesk);font-weight:600;letter-spacing:3px;text-transform:uppercase;font-size:13px;margin-bottom:16px}
   .project h3{font-family:var(--grotesk);font-weight:700;font-size:clamp(30px,4.4vw,50px);letter-spacing:-.5px;line-height:1.03}
-  .project p{color:var(--muted);font-size:16.5px;margin-top:18px;max-width:540px}
+  .project p{color:var(--muted);font-size:18px;margin-top:18px;max-width:540px}
+  .about p,.project p,.contact p,.lead{text-shadow:0 1px 12px rgba(0,0,0,.55)}
+  .about-grid>div:first-child,.project .grid>.reveal:first-child{background:rgba(12,12,14,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:30px 32px}
   .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
   .tag{font-family:var(--grotesk);font-weight:500;background:var(--card);border:1px solid var(--line);color:var(--muted);padding:7px 15px;border-radius:30px;font-size:13px}
   .plink{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-family:var(--grotesk);font-weight:600;color:var(--a2);font-size:15px;transition:.2s}
@@ -266,13 +269,13 @@
     .langbtn{padding:7px 13px;font-size:12px}
     h1{font-size:44px;letter-spacing:-1.5px;line-height:1.03}
     .eyebrow{letter-spacing:1.2px;font-size:11.5px;margin-bottom:22px}
-    .hero .lead{font-size:16px;margin-top:26px}
+    .hero .lead{font-size:17px;margin-top:26px}
     .cta{gap:6px;margin-top:30px;flex-wrap:nowrap}
     .btn{padding:12px 18px;font-size:13px}
     .cta .btn{padding:8px 10px;font-size:11px;white-space:nowrap;flex:0 0 auto;letter-spacing:0}
     .about h2{font-size:30px}
     .project h3{font-size:30px}
-    .about p,.project p{font-size:15.5px}
+    .about p,.project p{font-size:16.5px}
     .logo-item{width:188px;height:84px;padding:8px 16px}
     .worked-lane{height:116px}
     .lp-scroller{height:auto;max-height:420px;overflow:hidden;position:relative}
@@ -292,9 +295,9 @@
   .serv-card:hover{border-color:#3a3a42;transform:translateY(-4px)}
   .serv-ic{width:48px;height:48px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#08080a;margin-bottom:18px}
   .serv-card h3{font-family:var(--grotesk);font-weight:700;font-size:19px;margin-bottom:8px}
-  .serv-card p{color:var(--muted);font-size:15px;line-height:1.5}
+  .serv-card p{color:var(--muted);font-size:16px;line-height:1.6}
   .contact h2{font-family:var(--grotesk);font-weight:700;font-size:clamp(30px,4.5vw,50px);letter-spacing:-1px;margin-top:16px}
-  .contact p{color:var(--muted);font-size:17px;margin-top:14px}
+  .contact p{color:var(--muted);font-size:18px;margin-top:14px}
   .cform{display:flex;flex-direction:column;gap:14px;max-width:460px;margin-top:28px}
   .cform input[type=text],.cform input[type=email],.cform input[type=tel],.cform select,.cform textarea{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--text);font-size:15px;font-family:var(--sans);width:100%}
   .cform textarea{resize:vertical;min-height:110px;line-height:1.5}
@@ -332,7 +335,7 @@
   .hero .worked-lane{height:118px}
   .projhead{text-align:center;margin-bottom:40px}
   .projhead h2{font-family:var(--grotesk);font-weight:700;font-size:clamp(28px,4.4vw,46px);letter-spacing:-1px;margin-top:8px}
-  .pagefoot{text-align:center;margin-top:52px;padding-top:28px;border-top:1px solid var(--line)}
+  .pagefoot{text-align:center;margin-top:84px;padding-top:30px;border-top:1px solid var(--line)}
   .pagefoot small{display:block;color:var(--dim);font-size:12px;margin-top:12px}
   .pagefoot small:first-of-type{margin-top:0}
   .modal{position:fixed;inset:0;background:rgba(6,6,8,.94);display:none;align-items:center;justify-content:center;z-index:210;padding:24px}
@@ -682,34 +685,28 @@
     const hp=form.querySelector('[name="_honey"]');
     const emailEl=form.querySelector('input[name="email"]');
     const EMRE=/^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/;
-    if(emailEl) emailEl.addEventListener('input',()=>emailEl.setCustomValidity(''));
-    if(emailEl) emailEl.addEventListener('blur',function(){ var v=(emailEl.value||'').trim(); if(v && !EMRE.test(v)){ emailEl.setCustomValidity((document.documentElement.dir==='rtl')?'\u05d9\u05e9 \u05dc\u05d4\u05d6\u05d9\u05df \u05db\u05ea\u05d5\u05d1\u05ea \u05d0\u05d9\u05de\u05d9\u05d9\u05dc \u05ea\u05e7\u05d9\u05e0\u05d4.':'Please enter a valid email address.'); emailEl.reportValidity(); } else { emailEl.setCustomValidity(''); } });
-    const ifr=document.createElement('iframe');
-    ifr.name='ff_target'; ifr.style.display='none'; ifr.setAttribute('title','form target');
-    document.body.appendChild(ifr);
-    form.setAttribute('target','ff_target');
-    form.setAttribute('action','https://formsubmit.co/'+EM);
-    if(!form.querySelector('[name="_captcha"]')){
-      const c=document.createElement('input'); c.type='hidden'; c.name='_captcha'; c.setAttribute('value','false'); form.appendChild(c);
-    }
-    const t0=Date.now();
-    let sending=false, prev='', to=0;
+    const he=function(){ return document.documentElement.dir==='rtl'; };
+    const badmail=function(){ return he()?'יש להזין כתובת אימייל תקינה.':'Please enter a valid email address.'; };
+    if(emailEl) emailEl.addEventListener('input',function(){ emailEl.setCustomValidity(''); });
+    if(emailEl) emailEl.addEventListener('blur',function(){ var v=(emailEl.value||'').trim(); if(v && !EMRE.test(v)){ emailEl.setCustomValidity(badmail()); emailEl.reportValidity(); } else { emailEl.setCustomValidity(''); } });
+    const t0=Date.now(); let sending=false, prev='';
     form.addEventListener('submit',function(e){
+      e.preventDefault();
       if(ok) ok.hidden=true; if(err) err.hidden=true;
-      if(emailEl){ emailEl.setCustomValidity(EMRE.test((emailEl.value||'').trim())?'':((document.documentElement.dir==='rtl')?'\u05d9\u05e9 \u05dc\u05d4\u05d6\u05d9\u05df \u05db\u05ea\u05d5\u05d1\u05ea \u05d0\u05d9\u05de\u05d9\u05d9\u05dc \u05ea\u05e7\u05d9\u05e0\u05d4.':'Please enter a valid email address.')); }
-      if(!form.reportValidity()){ e.preventDefault(); return; }
-      if(hp && hp.value){ e.preventDefault(); return; }
-      if(Date.now()-t0 < 2000){ e.preventDefault(); if(err) err.hidden=false; return; }
-      prev=btn.textContent; btn.disabled=true;
-      btn.textContent=(document.documentElement.dir==='rtl')?'\u05e9\u05d5\u05dc\u05d7\u2026':'Sending\u2026';
-      sending=true;
-      to=setTimeout(function(){ if(sending){ sending=false; if(err) err.hidden=false; btn.disabled=false; btn.textContent=prev; } },15000);
-    });
-    ifr.addEventListener('load',function(){
-      if(!sending) return;
-      sending=false; clearTimeout(to);
-      form.reset(); if(ok) ok.hidden=false;
-      btn.disabled=false; btn.textContent=prev;
+      if(emailEl){ emailEl.setCustomValidity(EMRE.test((emailEl.value||'').trim())?'':badmail()); }
+      if(!form.reportValidity()) return;
+      if(hp && hp.value) return;
+      if(Date.now()-t0 < 2000){ if(err) err.hidden=false; return; }
+      if(sending) return;
+      sending=true; prev=btn.textContent; btn.disabled=true;
+      btn.textContent=he()?'שולח…':'Sending…';
+      var data={}; new FormData(form).forEach(function(v,k){ data[k]=v; });
+      var finish=function(good){ sending=false; btn.disabled=false; btn.textContent=prev; if(good){ form.reset(); if(ok) ok.hidden=false; } else if(err){ err.hidden=false; } };
+      var ctrl=new AbortController(); var tk=setTimeout(function(){ ctrl.abort(); },15000);
+      fetch('https://formsubmit.co/ajax/'+EM,{ method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify(data), signal:ctrl.signal })
+        .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, j:j}; }); })
+        .then(function(res){ clearTimeout(tk); finish(res.ok && res.j && String(res.j.success)==='true'); })
+        .catch(function(){ clearTimeout(tk); finish(false); });
     });
   })();
   (function(){
