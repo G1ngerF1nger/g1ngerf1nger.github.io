@@ -19,7 +19,8 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>html[dir="rtl"]{--grotesk:'Heebo','Segoe UI',Arial,sans-serif;--sans:'Heebo','Segoe UI',Arial,sans-serif}</style>
 <style>
   :root{
     --bg:#0a0a0b; --bg2:#101012; --card:#141416; --line:#26262c;
@@ -165,7 +166,8 @@
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
   @keyframes rise{to{opacity:1;transform:none}}
 
-  .k{font-family:var(--grotesk);letter-spacing:5px;text-transform:uppercase;font-size:13px;color:var(--a2)}
+  .k{display:none}
+  .about h2,.projhead h2,.serv-title,.contact h2{color:var(--a2)}
   .about h2{font-family:var(--grotesk);font-weight:700;font-size:clamp(32px,5vw,52px);letter-spacing:-1.5px;margin-top:16px}
   .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:center;width:100%}
   .about-photo img{width:100%;max-width:330px;border-radius:20px;display:block;border:1px solid var(--line);margin-left:auto}
@@ -407,7 +409,7 @@
   <div class="wrap reveal"><div class="about-grid">
     <div>
       <div class="k" data-i18n="about_k">About</div>
-      <h2 data-i18n="about_h">From customer-facing work to building AI.</h2>
+      <h2 data-i18n="about_h">From customer-facing work to building AI</h2>
       <p data-i18n="about_p">After years in international sales, customer service and team leadership (managing a 250,000+ client base), I moved into AI. Today I write prompts, build no-code and code-based AI agents and automations and use generative AI to create landing pages and full websites, from prompt to published page. I turn repetitive, slow work into reliable, precise solutions, with complete understanding and genuine care for my client’s needs.</p>
       <p class="cred"><svg class="cred-ic" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg><span data-i18n="hackeru">I completed the AI Solutions Architect program at HackerU and hold the certificate.</span></p>
       <div class="chips"><span class="tag">AI Agents</span><span class="tag">Prompt Engineering</span><span class="tag">Workflow Automation</span><span class="tag">Generative AI</span><span class="tag">AI Web Development</span></div>
@@ -466,7 +468,7 @@
 <section class="services" id="services">
   <div class="wrap reveal">
     <div class="k" data-i18n="serv_k">Services</div>
-    <h2 class="serv-title" data-i18n="serv_h">What I can build for you.</h2>
+    <h2 class="serv-title" data-i18n="serv_h">What I can build for you</h2>
     <div class="serv-grid">
       <div class="serv-card"><div class="serv-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div><h3 data-i18n="serv1">Workflow Automations</h3><p data-i18n="serv1d">Automate repetitive business processes end to end with n8n and Make.</p></div>
       <div class="serv-card"><div class="serv-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2a1.5 1.5 0 011.5 1.5V5H17a3 3 0 013 3v8a3 3 0 01-3 3H7a3 3 0 01-3-3V8a3 3 0 013-3h3.5V3.5A1.5 1.5 0 0112 2zM9 11a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg></div><h3 data-i18n="serv2">Agents</h3><p data-i18n="serv2d">AI agents that take a goal and carry out multi-step tasks on their own.</p></div>
@@ -482,7 +484,7 @@
 <section class="contact" id="contact">
   <div class="wrap reveal">
     <div class="k" data-i18n="cont_k">Contact</div>
-    <h2 data-i18n="cont_h">Let&rsquo;s work together.</h2>
+    <h2 data-i18n="cont_h">Let&rsquo;s work together</h2>
     <p data-i18n="cont_p">Leave your details and I&rsquo;ll get back to you.</p>
     <form class="cform" action="#" method="POST">
       <input type="hidden" name="_subject" value="New lead from portfolio">
@@ -575,17 +577,17 @@
     h1a:"I’m Shai,",h1b:"and I build",h1c:"AI that works.",hl_build:"I build",rot1:"AI agents",rot2:"automations",rot3:"AI websites",rot4:"real results",sc1t:"AI Agents",sc1c:"that run multi-step tasks on their own.",sc2t:"Automations",sc2c:"that erase hours of busywork.",sc3t:"AI-Built Websites",sc3c:"from prompt to live, on-brand.",gt:"Generative AI",gc:"images and content, on-brand.",pt:"Prompt Engineering",pc:"tuned and tested for reliable output.",pe_tag:"tested ✓",sc4t:"Real Results",sc4c:"tools that pay for themselves.",ag_user:"Find and qualify new leads.",ag_a1:"On it: scanning sources…",ag_tool:"running automation",ag_a2:"Done: 42 qualified leads.",
     lead:"Spending too much time on repetitive, boring tasks? Need help simplifying your workflow? Want AI agents that work for you, or even a modern website? <br><strong>I’m Shai and that’s exactly what I can do for you.</strong>",
     cta_work:"View my projects",cta_cv:"Download CV",scroll:"Scroll",worked:"Worked with",work_k:"Selected Projects",work_h:"Projects",
-    about_k:"About",about_h:"From customer-facing work to building AI.",
+    about_k:"About",about_h:"From customer-facing work to building AI",
     p1_cat:"AI Tool &nbsp;/&nbsp; Compliance",p1_h:"Automatic Payrolls Audit",
     p2_cat:"AI Agent &nbsp;/&nbsp; Automation",p2_h:"Organic Leads Agent",
     p3_cat:"Generative AI &nbsp;/&nbsp; Marketing",p3_h:"Landing Pages",
-    serv_k:"Services",serv_h:"What I can build for you.",
+    serv_k:"Services",serv_h:"What I can build for you",
     serv1:"Workflow Automations",serv1d:"Automate repetitive business processes end to end with n8n and Make.",
     serv2:"Agents",serv2d:"AI agents that take a goal and carry out multi-step tasks on their own.",
     serv3:"Generative AI",serv3d:"Put generative AI to work: content, images and copy tailored to your brand.",
     serv4:"Prompt Engineering",serv4d:"Craft and test prompts that produce reliable, consistent results.",
     serv5:"AI Website Building",serv5d:"Fast, modern websites and landing pages with AI, from prompt to live.",
-    cont_k:"Contact",cont_h:"Let’s work together.",cont_p:"Leave your details and I’ll get back to you.",
+    cont_k:"Contact",cont_h:"Let’s work together",cont_p:"Leave your details and I’ll get back to you.",
     ph_name:"Full name",ph_email:"Email",ph_phone:"Phone (optional)",cont_send:"Send",
     consent:"I agree to be contacted and to my details being processed for this purpose.",
     privnote:"Your details are used only to contact you back and are never shared or sold.",
@@ -596,17 +598,17 @@
     h1a:"אני שי,",h1b:"ואני בונה",h1c:"AI שעובד.",hl_build:"אני בונה",rot1:"סוכני AI",rot2:"אוטומציות",rot3:"אתרי AI",rot4:"תוצאות אמיתיות",sc1t:"סוכני AI",sc1c:"שמבצעים משימות רב-שלביות בעצמם.",sc2t:"אוטומציות",sc2c:"שמוחקות שעות של עבודה ידנית.",sc3t:"אתרים ב-AI",sc3c:"מהפרומפט ועד האוויר, במיתוג שלך.",gt:"AI גנרטיבי",gc:"תמונות ותוכן, במיתוג שלך.",pt:"הנדסת פרומפטים",pc:"מדויקים ובדוקים לתוצאה אמינה.",pe_tag:"נבדק ✓",sc4t:"תוצאות אמיתיות",sc4c:"כלים שמחזירים את ההשקעה.",ag_user:"מצא ומיין לידים חדשים.",ag_a1:"עובד על זה: סורק מקורות…",ag_tool:"מריץ אוטומציה",ag_a2:"בוצע: 42 לידים מוכנים.",
     lead:"לוקח לכם יותר מדי זמן לבצע פעולות רפיטטיביות ומשעממות? צריכים עזרה בייעול תהליכים? רוצים סוכני AI שעובדים עבורכם או בכלל אתר אינטרנט מודרני? <br><strong>אני שי וזה בדיוק מה שאני יכול לעשות עבורכם.</strong>",
     cta_work:"לצפייה בפרויקטים",cta_cv:"הורדת קורות חיים",scroll:"גלול",worked:"עבדתי עם",work_k:"פרויקטים נבחרים",work_h:"פרויקטים",
-    about_k:"אודות",about_h:"מעבודה מול לקוחות אל בניית פתרונות AI.",
+    about_k:"אודות",about_h:"מעבודה מול לקוחות אל בניית פתרונות AI",
     p1_cat:"כלי AI &nbsp;/&nbsp; רגולציה",p1_h:"מערכת אוטומטית לבדיקת תלושי שכר",
     p2_cat:"סוכן AI &nbsp;/&nbsp; אוטומציה",p2_h:"סוכן לידים אורגני",
     p3_cat:"AI גנרטיבי &nbsp;/&nbsp; שיווק",p3_h:"דפי נחיתה",
-    serv_k:"שירותים",serv_h:"מה אני יכול לבנות עבורך.",
+    serv_k:"שירותים",serv_h:"מה אני יכול לבנות עבורך",
     serv1:"אוטומציות תהליכים",serv1d:"הפיכת תהליכים עסקיים חוזרים לאוטומטיים מקצה לקצה עם n8n ו-Make.",
     serv2:"סוכני AI",serv2d:"סוכנים שמקבלים מטרה ומבצעים משימות רב-שלביות בעצמם.",
     serv3:"AI גנרטיבי",serv3d:"רתימת AI גנרטיבי ליצירת תוכן, תמונות וקופי מותאמים למותג שלך.",
     serv4:"הנדסת פרומפטים",serv4d:"כתיבה ובדיקה של פרומפטים שמפיקים תוצאות אמינות ועקביות.",
     serv5:"בניית אתרים עם AI",serv5d:"אתרים ודפי נחיתה מהירים ומודרניים עם AI, מהפרומפט ועד העלייה לאוויר.",
-    cont_k:"צור קשר",cont_h:"בואו נעבוד יחד.",cont_p:"השאירו פרטים ואחזור אליכם.",
+    cont_k:"צור קשר",cont_h:"בואו נעבוד יחד",cont_p:"השאירו פרטים ואחזור אליכם.",
     ph_name:"שם מלא",ph_email:"אימייל",ph_phone:"טלפון (לא חובה)",cont_send:"שליחה",
     consent:"אני מסכים/ה שייצרו איתי קשר ושפרטיי יעובדו למטרה זו.",
     privnote:"הפרטים משמשים אך ורק כדי לחזור אליך ואינם משותפים או נמכרים לעולם.",
