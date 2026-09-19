@@ -39,7 +39,7 @@
   --ease:cubic-bezier(.6,.05,.15,1);
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;height:100%;overflow:hidden;overscroll-behavior:none}
+html,body{margin:0;padding:0;height:100%}
 body{
   font-family:var(--font);color:var(--ink);background:var(--bg);
   line-height:1.65;-webkit-font-smoothing:antialiased;overflow:hidden;
@@ -97,7 +97,7 @@ nav.links a.active::after{content:"";position:absolute;inset-inline:15px;bottom:
 .burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
 
 /* ============ DECK / PAGES ============ */
-#deck{height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior:contain}
+#deck{height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;scrollbar-width:none}
 #deck::-webkit-scrollbar{display:none}
 .page{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;position:relative;display:flex;flex-direction:column}
 .page-inner{
@@ -162,19 +162,35 @@ nav.links a.active::after{content:"";position:absolute;inset-inline:15px;bottom:
 
 /* ============ GALLERY ============ */
 #gallery{background:var(--cream)}
-.gal-frame{position:relative;padding:22px 34px;margin:2px 4px}
-.gal-frame .fc{position:absolute;width:40px;height:40px;border:0 solid var(--green);pointer-events:none;opacity:.9}
-.gal-frame .fc.tl{top:0;inset-inline-start:0;border-top-width:3px;border-inline-start-width:3px;border-start-start-radius:14px}
-.gal-frame .fc.tr{top:0;inset-inline-end:0;border-top-width:3px;border-inline-end-width:3px;border-start-end-radius:14px}
-.gal-frame .fc.bl{bottom:0;inset-inline-start:0;border-bottom-width:3px;border-inline-start-width:3px;border-end-start-radius:14px}
-.gal-frame .fc.br{bottom:0;inset-inline-end:0;border-bottom-width:3px;border-inline-end-width:3px;border-end-end-radius:14px}
-.gal-vine{position:absolute;top:50%;transform:translateY(-50%);color:var(--green);opacity:.5;width:22px;height:auto;pointer-events:none}
-.gal-vine.left{inset-inline-start:6px}
-.gal-vine.right{inset-inline-end:6px;transform:translateY(-50%) scaleX(-1)}
-.gal-vine svg{width:100%;height:auto;display:block}
+/* open-book presentation */
+.gal-book{
+  position:relative;margin:12px auto 0;max-width:1120px;
+  padding:26px clamp(20px,3vw,42px) 30px;
+  background:
+    linear-gradient(90deg,
+      rgba(80,62,34,.09) 0%, rgba(80,62,34,0) 6%,
+      rgba(80,62,34,0) 44%, rgba(80,62,34,.14) 50%, rgba(80,62,34,0) 56%,
+      rgba(80,62,34,0) 94%, rgba(80,62,34,.09) 100%),
+    linear-gradient(180deg,#fdfbf5 0%, #f4eddd 100%);
+  border-radius:6px 6px 9px 9px;
+  box-shadow:
+    -7px 0 0 -3px #efe8d6, -12px 0 0 -6px #e6ddc6,
+     7px 0 0 -3px #efe8d6,  12px 0 0 -6px #e6ddc6,
+     0 30px 60px rgba(38,64,28,.22), 0 6px 16px rgba(38,64,28,.12);
+}
+.gal-book::after{ /* bottom page-block edge */
+  content:"";position:absolute;left:14px;right:14px;bottom:-8px;height:8px;z-index:-1;
+  background:linear-gradient(180deg,#e7dfc8,#d6ccb0);border-radius:0 0 10px 10px;
+  box-shadow:0 5px 10px rgba(0,0,0,.14);
+}
+.book-spine{
+  position:absolute;top:16px;bottom:16px;left:50%;width:3px;transform:translateX(-50%);
+  background:linear-gradient(180deg,transparent,rgba(80,62,34,.4),rgba(80,62,34,.28),transparent);
+  z-index:4;pointer-events:none;border-radius:3px;
+}
 .gal-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
 .gallery-wrap{max-height:min(66vh,660px);overflow-y:auto;border-radius:14px}
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));grid-auto-rows:290px;gap:16px}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:300px;gap:20px 48px}
 .gallery-grid figure{margin:0;overflow:hidden;border-radius:14px;position:relative;cursor:pointer;background:#e7ede0}
 .gallery-grid img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
 .gallery-grid figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(38,64,28,.45));opacity:0;transition:.35s}
@@ -336,11 +352,11 @@ html.a11y-headings h1,html.a11y-headings h2,html.a11y-headings h3{outline:2px da
   .svc-card{padding:18px 18px}
   .svc-ico{width:46px;height:46px;margin-bottom:12px}
   .field.two{grid-template-columns:1fr}
-  .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));grid-auto-rows:170px}
+  .gallery-grid{grid-template-columns:1fr;grid-auto-rows:210px;gap:16px}
   .gallery-wrap{max-height:min(62vh,460px)}
-  .gal-frame{padding:14px 18px;margin:0}
-  .gal-vine{display:none}
-  .gal-frame .fc{width:26px;height:26px}
+  .gal-book{padding:16px 16px 20px;margin:8px 2px 0;background:linear-gradient(180deg,#fdfbf5,#f4eddd)}
+  .gal-book::after{left:10px;right:10px}
+  .book-spine{display:none}
   #hero .tag{font-size:16px}
   .brand-logo{height:54px}
 }
@@ -433,11 +449,8 @@ html.a11y-headings h1,html.a11y-headings h2,html.a11y-headings h3{outline:2px da
           <p class="sec-sub reveal d1" data-he="מבחר מהגינות שתכננו, הקמנו ופיתחנו." data-en="A selection of gardens we planned, built and developed.">מבחר מהגינות שתכננו, הקמנו ופיתחנו.</p>
         </div>
       </div>
-      <div class="gal-frame reveal d2">
-        <span class="fc tl" aria-hidden="true"></span><span class="fc tr" aria-hidden="true"></span>
-        <span class="fc bl" aria-hidden="true"></span><span class="fc br" aria-hidden="true"></span>
-        <span class="gal-vine left" aria-hidden="true"><svg viewBox="0 0 24 168" fill="currentColor"><rect x="11" y="0" width="2" height="168" rx="1"/><path d="M12 22C6 18 3 20 1 15 7 13 11 15 12 22Z"/><path d="M12 48C18 44 21 46 23 41 17 39 13 41 12 48Z"/><path d="M12 74C6 70 3 72 1 67 7 65 11 67 12 74Z"/><path d="M12 100C18 96 21 98 23 93 17 91 13 93 12 100Z"/><path d="M12 126C6 122 3 124 1 119 7 117 11 119 12 126Z"/><path d="M12 152C18 148 21 150 23 145 17 143 13 145 12 152Z"/></svg></span>
-        <span class="gal-vine right" aria-hidden="true"><svg viewBox="0 0 24 168" fill="currentColor"><rect x="11" y="0" width="2" height="168" rx="1"/><path d="M12 22C6 18 3 20 1 15 7 13 11 15 12 22Z"/><path d="M12 48C18 44 21 46 23 41 17 39 13 41 12 48Z"/><path d="M12 74C6 70 3 72 1 67 7 65 11 67 12 74Z"/><path d="M12 100C18 96 21 98 23 93 17 91 13 93 12 100Z"/><path d="M12 126C6 122 3 124 1 119 7 117 11 119 12 126Z"/><path d="M12 152C18 148 21 150 23 145 17 143 13 145 12 152Z"/></svg></span>
+      <div class="gal-book reveal d2">
+        <span class="book-spine" aria-hidden="true"></span>
         <div class="gallery-wrap" id="galleryWrap">
           <div class="gallery-grid" id="galleryGrid"></div>
         </div>
