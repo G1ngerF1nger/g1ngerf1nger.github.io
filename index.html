@@ -371,6 +371,38 @@
     .about-grid,.grid{align-items:start}
     .hero .marquee-band{padding:34px 0 0}
   }
+
+  /* Accessibility widget */
+  .a11y-fab{position:fixed;bottom:22px;left:22px;z-index:1300;width:58px;height:58px;border-radius:50%;border:1px solid #ff7a3d;cursor:grab;touch-action:none;background:#141416;box-shadow:0 8px 22px rgba(0,0,0,.45),0 0 18px rgba(255,122,61,.4);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s}
+  .a11y-fab:active{cursor:grabbing}
+  .a11y-fab:hover{transform:translateY(-2px) scale(1.06);box-shadow:0 10px 26px rgba(0,0,0,.5),0 0 26px rgba(255,122,61,.6)}
+  .a11y-fab svg{width:34px;height:34px;display:block}
+  .a11y-panel{position:fixed;bottom:90px;left:22px;z-index:1300;width:252px;max-width:calc(100vw - 44px);background:#141416;border:1px solid #2a2a30;border-radius:16px;padding:14px;box-shadow:0 16px 44px rgba(0,0,0,.55);display:none;font-family:var(--sans)}
+  .a11y-panel.open{display:block}
+  .a11y-panel h3{margin:2px 4px 12px;font-size:15px;color:#f4f4f5;font-family:var(--grotesk);font-weight:700}
+  .a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .a11y-btn{background:#1c1c22;border:1px solid #2f2f37;border-radius:11px;color:#ececed;padding:11px 8px;font-size:12.5px;cursor:pointer;font-family:inherit;text-align:center;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1.25}
+  .a11y-btn:hover{border-color:#ff7a3d;color:#fff}
+  .a11y-btn.active{background:rgba(255,122,61,.16);border-color:#ff7a3d;color:#ffb383}
+  .a11y-btn .ico{font-size:16px;line-height:1;font-weight:700}
+  .a11y-reset{grid-column:1 / -1;background:transparent;border:1px dashed #3a3a42;color:#b3b4bd;flex-direction:row;margin-top:2px}
+  .a11y-reset:hover{color:#ff9a5c;border-color:#ff7a3d}
+  [dir=rtl] .a11y-fab,[dir=rtl] .a11y-panel{left:auto;right:22px}
+  body.a11y-contrast{background:#000 !important}
+  body.a11y-contrast p,body.a11y-contrast li,body.a11y-contrast h1,body.a11y-contrast h2,body.a11y-contrast h3,body.a11y-contrast span,body.a11y-contrast a,body.a11y-contrast strong{color:#fff !important;text-shadow:none !important}
+  body.a11y-contrast a{color:#ffb37a !important}
+  body.a11y-links a{text-decoration:underline !important;text-underline-offset:3px}
+  body.a11y-links a:hover,body.a11y-links a:focus{outline:2px solid #ff7a3d;outline-offset:2px}
+  body.a11y-readable,body.a11y-readable p,body.a11y-readable li,body.a11y-readable a,body.a11y-readable span,body.a11y-readable h1,body.a11y-readable h2,body.a11y-readable h3{font-family:Arial,'Segoe UI',sans-serif !important;letter-spacing:.02em;line-height:1.85 !important}
+  body.a11y-nomotion *{animation-duration:.001ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;transition-delay:0ms !important;scroll-behavior:auto !important}
+  body.a11y-nomotion .reveal{opacity:1 !important;transform:none !important}
+  body.a11y-nomotion .grad,body.a11y-nomotion .eyebrow,body.a11y-nomotion h1 span,body.a11y-nomotion .lead,body.a11y-nomotion .cta,body.a11y-nomotion .hero-loop .hl-static{opacity:1 !important;transform:none !important}
+  body.a11y-nomotion .sc-scene{animation:none !important;opacity:0 !important}
+  body.a11y-nomotion .sc-scene:nth-child(1){opacity:1 !important;position:relative !important}
+  body.a11y-nomotion .sc-scene:nth-child(n+2){display:none !important}
+  body.a11y-nomotion .hero-loop .hl-item{animation:none !important;opacity:0 !important}
+  body.a11y-nomotion .hero-loop .hl-item:nth-child(1){opacity:1 !important;position:relative !important;transform:none !important}
+  body.a11y-nomotion .hero-loop .hl-item:nth-child(n+2){display:none !important}
 </style>
 </head>
 <body>
@@ -500,6 +532,7 @@
         <option value="Generative AI" data-i18n="serv3">Generative AI</option>
         <option value="Prompt Engineering" data-i18n="serv4">Prompt Engineering</option>
         <option value="AI Website Building" data-i18n="serv5">AI Website Building</option>
+        <option value="Other" data-i18n="serv6">Other</option>
       </select>
       <textarea name="message" rows="4" required data-i18n-ph="ph_message" data-i18n-aria="ph_message" aria-label="Your main need" placeholder="Tell me briefly what you need"></textarea>
       <label class="consent"><input type="checkbox" name="consent" required><span data-i18n="consent">I agree to be contacted and to my details being processed for this purpose.</span></label>
@@ -514,10 +547,26 @@
       <small class="cookienote" data-i18n="cookienote">This site uses only essential local storage to remember your language. No tracking cookies.</small>
       <small class="cookienote" data-i18n="a11ynote">Accessibility: this site is built to follow WCAG best practices.</small>
       <a href="#" id="privacy-open" class="footlink" data-i18n="privlink">Privacy Policy</a>
+      <a href="#" id="accessibility-open" class="footlink" data-i18n="a11ylink">Accessibility Statement</a>
     </div>
   </div>
 </section>
 </main>
+
+
+<button class="a11y-fab" id="a11yFab" aria-haspopup="true" aria-expanded="false" aria-label="Accessibility menu" data-i18n-aria="a11y_w_open"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="2.6" r="1.3" fill="#ff7a3d"/><rect x="11.35" y="3.2" width="1.3" height="2.6" fill="#ff7a3d"/><rect x="4.3" y="6" width="15.4" height="12" rx="4.2" fill="#ff7a3d"/><rect x="2.2" y="10" width="1.7" height="4.2" rx=".85" fill="#ff7a3d"/><rect x="20.1" y="10" width="1.7" height="4.2" rx=".85" fill="#ff7a3d"/><circle cx="9.1" cy="11.6" r="1.75" fill="#141416"/><circle cx="14.9" cy="11.6" r="1.75" fill="#141416"/><rect x="9.3" y="15" width="5.4" height="1.4" rx=".7" fill="#141416"/></svg></button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Accessibility options">
+  <h3 data-i18n="a11y_w_title">Accessibility</h3>
+  <div class="a11y-grid">
+    <button class="a11y-btn" id="a11yBigger" type="button"><span class="ico">A+</span><span data-i18n="a11y_w_bigger">Bigger text</span></button>
+    <button class="a11y-btn" id="a11ySmaller" type="button"><span class="ico">A-</span><span data-i18n="a11y_w_smaller">Smaller text</span></button>
+    <button class="a11y-btn" id="a11yContrast" type="button"><span class="ico">&#9681;</span><span data-i18n="a11y_w_contrast">High contrast</span></button>
+    <button class="a11y-btn" id="a11yLinks" type="button"><span class="ico">&#128279;</span><span data-i18n="a11y_w_links">Highlight links</span></button>
+    <button class="a11y-btn" id="a11yReadable" type="button"><span class="ico">Aa</span><span data-i18n="a11y_w_readable">Readable font</span></button>
+    <button class="a11y-btn" id="a11yMotion" type="button"><span class="ico">&#10073;&#10073;</span><span data-i18n="a11y_w_motion">Pause motion</span></button>
+    <button class="a11y-btn a11y-reset" id="a11yReset" type="button"><span data-i18n="a11y_w_reset">Reset all</span></button>
+  </div>
+</div>
 
 <div class="lb" id="lb"><img id="lbimg" src="" alt="Landing page enlarged"></div>
 
@@ -526,6 +575,13 @@
     <button class="modal-x" aria-label="Close">&times;</button>
     <h2 data-i18n="pp_h">Privacy Policy</h2>
     <div class="modal-body" data-i18n-html="pp_body"><p><strong>Last updated: 2026.</strong></p><p>This website is the professional portfolio of Shai Marom, where I showcase my work and offer AI services to businesses. This policy explains what information is collected and how it is used.</p><p><strong>What I collect.</strong> If you use the contact form, I collect the name, email address and phone number you provide. Nothing else is collected about you and the site has no analytics or advertising trackers.</p><p><strong>Why.</strong> Your details are used only to respond to your enquiry about my work or services and to get back to you. They are never sold, rented or shared with third parties for marketing.</p><p><strong>How it is handled.</strong> Form submissions are delivered to my email through a form-relay service (FormSubmit) and stored in my email inbox.</p><p><strong>Cookies and storage.</strong> The site uses only essential local storage to remember your language preference. There are no tracking or advertising cookies.</p><p><strong>Your rights.</strong> You can ask me to see, correct or delete the details you sent at any time. Just email me and I will take care of it.</p><p><strong>Fonts.</strong> The site loads web fonts from Google Fonts, so Google receives your IP address when the page loads. No other data is shared with Google.</p><p><strong>Contact.</strong> Please use the contact form on this site.</p></div>
+  </div>
+</div>
+<div class="modal" id="accessibility" role="dialog" aria-modal="true" aria-label="Accessibility Statement">
+  <div class="modal-box">
+    <button class="modal-x" aria-label="Close">&times;</button>
+    <h2 data-i18n="a11y_h">Accessibility Statement</h2>
+    <div class="modal-body" data-i18n-html="a11y_body"><p><strong>Last updated: September 2026.</strong></p><p>I want this website to be usable by everyone, including people with disabilities, and I make ongoing efforts to keep it accessible and to improve it over time.</p><p><strong>Standard.</strong> This site is built to follow the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA, which is the basis of the Israeli accessibility standard IS 5568.</p><p><strong>What has been done.</strong> The site uses a semantic HTML structure and headings, a skip-to-content link, text alternatives for images, labelled form fields, keyboard navigation, clear colour contrast, a Hebrew and English language switch, and it respects the browser reduced-motion setting for visitors who prefer less animation.</p><p><strong>Known limitations.</strong> Some content relies on JavaScript, and a few generative-AI images are decorative. I work to close any gaps as they are found.</p><p><strong>Found a problem?</strong> If any part of the site is difficult to access, please tell me and I will fix it as quickly as I can. You can reach me through the contact form on this site.</p><p><strong>Accessibility coordinator:</strong> Shai Marom.</p></div>
   </div>
 </div>
 <script>
@@ -586,13 +642,13 @@
     serv2:"Agents",serv2d:"AI agents that take a goal and carry out multi-step tasks on their own.",
     serv3:"Generative AI",serv3d:"Put generative AI to work: content, images and copy tailored to your brand.",
     serv4:"Prompt Engineering",serv4d:"Craft and test prompts that produce reliable, consistent results.",
-    serv5:"AI Website Building",serv5d:"Fast, modern websites and landing pages with AI, from prompt to live.",
+    serv5:"AI Website Building",serv6:"Other",serv5d:"Fast, modern websites and landing pages with AI, from prompt to live.",
     cont_k:"Contact",cont_h:"Let’s work together",cont_p:"Leave your details and I’ll get back to you.",
     ph_name:"Full name",ph_email:"Email",ph_phone:"Phone (optional)",cont_send:"Send",
     consent:"I agree to be contacted and to my details being processed for this purpose.",
     privnote:"Your details are used only to contact you back and are never shared or sold.",
     foot_k:"Get in touch",foot_h:"Let’s talk.",
-    about_p:"After years in international sales, customer service and team leadership (managing a 250,000+ client base), I moved into AI. Today I write prompts, build no-code and code-based AI agents and automations and use generative AI to create landing pages and full websites, from prompt to published page. I turn repetitive, slow work into reliable, precise solutions, with complete understanding and genuine care for my client’s needs.",p1_p:"A browser-based tool that ingests a payroll export (Excel/CSV) and validates each employee’s pension, study-fund, severance and national-insurance contributions against current Israeli labor law. It flags every legal exception per employee and exports a monthly compliance report with charts, turning a slow, error-prone manual check into a fast, reliable one.",p2_p:"An automated AI agent that finds and qualifies organic leads end to end. It collects potential leads from online sources, enriches and scores each one by relevance and fit and delivers a clean, ready-to-contact list, replacing hours of manual prospecting with a fast, repeatable flow that keeps the pipeline full.",p3_p:"A series of landing pages and social campaign visuals built end to end with generative AI. I wrote and refined the prompts, generated the imagery and layouts with Gemini and Nano Banana and shaped a consistent, on-brand visual language across the whole set. Scroll through the set and click any page to open it full size.",copyright:"© 2026 Shai Marom. All rights reserved.",pp_h:"Privacy Policy",privlink:"Privacy Policy",pp_body:"<p><strong>Last updated: 2026.</strong></p><p>This website is the professional portfolio of Shai Marom, where I showcase my work and offer AI services to businesses. This policy explains what information is collected and how it is used.</p><p><strong>What I collect.</strong> If you use the contact form, I collect the name, email address and phone number you provide. Nothing else is collected about you and the site has no analytics or advertising trackers.</p><p><strong>Why.</strong> Your details are used only to respond to your enquiry about my work or services and to get back to you. They are never sold, rented or shared with third parties for marketing.</p><p><strong>How it is handled.</strong> Form submissions are delivered to my email through a form-relay service (FormSubmit) and stored in my email inbox.</p><p><strong>Cookies and storage.</strong> The site uses only essential local storage to remember your language preference. There are no tracking or advertising cookies.</p><p><strong>Your rights.</strong> You can ask me to see, correct or delete the details you sent at any time. Just email me and I will take care of it.</p><p><strong>Fonts.</strong> The site loads web fonts from Google Fonts, so Google receives your IP address when the page loads. No other data is shared with Google.</p><p><strong>Contact.</strong> Please use the contact form on this site.</p>",a11ynote:"Accessibility: this site is built to follow WCAG best practices.",hackeru:"I completed the AI Solutions Architect program at HackerU and hold the certificate.",req_field:"Please fill in this field.",req_check:"Please tick the box to continue.",req_email:"Please enter a valid email address.",req_service:"Please choose a service.",svc_ph:"Choose a service",svc_aria:"Service needed",ph_message:"Tell me briefly what you need",sent_ok:"Thanks! Your message has been sent, I'll get back to you soon.",sent_err:"Something went wrong. Please try again in a moment.",cookienote:"This site uses only essential local storage to remember your language. No tracking cookies."},
+    about_p:"After years in international sales, customer service and team leadership (managing a 250,000+ client base), I moved into AI. Today I write prompts, build no-code and code-based AI agents and automations and use generative AI to create landing pages and full websites, from prompt to published page. I turn repetitive, slow work into reliable, precise solutions, with complete understanding and genuine care for my client’s needs.",p1_p:"A browser-based tool that ingests a payroll export (Excel/CSV) and validates each employee’s pension, study-fund, severance and national-insurance contributions against current Israeli labor law. It flags every legal exception per employee and exports a monthly compliance report with charts, turning a slow, error-prone manual check into a fast, reliable one.",p2_p:"An automated AI agent that finds and qualifies organic leads end to end. It collects potential leads from online sources, enriches and scores each one by relevance and fit and delivers a clean, ready-to-contact list, replacing hours of manual prospecting with a fast, repeatable flow that keeps the pipeline full.",p3_p:"A series of landing pages and social campaign visuals built end to end with generative AI. I wrote and refined the prompts, generated the imagery and layouts with Gemini and Nano Banana and shaped a consistent, on-brand visual language across the whole set. Scroll through the set and click any page to open it full size.",copyright:"© 2026 Shai Marom. All rights reserved.",pp_h:"Privacy Policy",privlink:"Privacy Policy",pp_body:"<p><strong>Last updated: 2026.</strong></p><p>This website is the professional portfolio of Shai Marom, where I showcase my work and offer AI services to businesses. This policy explains what information is collected and how it is used.</p><p><strong>What I collect.</strong> If you use the contact form, I collect the name, email address and phone number you provide. Nothing else is collected about you and the site has no analytics or advertising trackers.</p><p><strong>Why.</strong> Your details are used only to respond to your enquiry about my work or services and to get back to you. They are never sold, rented or shared with third parties for marketing.</p><p><strong>How it is handled.</strong> Form submissions are delivered to my email through a form-relay service (FormSubmit) and stored in my email inbox.</p><p><strong>Cookies and storage.</strong> The site uses only essential local storage to remember your language preference. There are no tracking or advertising cookies.</p><p><strong>Your rights.</strong> You can ask me to see, correct or delete the details you sent at any time. Just email me and I will take care of it.</p><p><strong>Fonts.</strong> The site loads web fonts from Google Fonts, so Google receives your IP address when the page loads. No other data is shared with Google.</p><p><strong>Contact.</strong> Please use the contact form on this site.</p>",a11ynote:"Accessibility: this site is built to follow WCAG best practices.",a11ylink:"Accessibility Statement",a11y_h:"Accessibility Statement",a11y_body:"<p><strong>Last updated: September 2026.</strong></p><p>I want this website to be usable by everyone, including people with disabilities, and I make ongoing efforts to keep it accessible and to improve it over time.</p><p><strong>Standard.</strong> This site is built to follow the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA, which is the basis of the Israeli accessibility standard IS 5568.</p><p><strong>What has been done.</strong> The site uses a semantic HTML structure and headings, a skip-to-content link, text alternatives for images, labelled form fields, keyboard navigation, clear colour contrast, a Hebrew and English language switch, and it respects the browser reduced-motion setting for visitors who prefer less animation.</p><p><strong>Known limitations.</strong> Some content relies on JavaScript, and a few generative-AI images are decorative. I work to close any gaps as they are found.</p><p><strong>Found a problem?</strong> If any part of the site is difficult to access, please tell me and I will fix it as quickly as I can. You can reach me through the contact form on this site.</p><p><strong>Accessibility coordinator:</strong> Shai Marom.</p>",a11y_w_open:"Accessibility menu",a11y_w_title:"Accessibility",a11y_w_bigger:"Bigger text",a11y_w_smaller:"Smaller text",a11y_w_contrast:"High contrast",a11y_w_links:"Highlight links",a11y_w_readable:"Readable font",a11y_w_motion:"Pause motion",a11y_w_reset:"Reset all",hackeru:"I completed the AI Solutions Architect program at HackerU and hold the certificate.",req_field:"Please fill in this field.",req_check:"Please tick the box to continue.",req_email:"Please enter a valid email address.",req_service:"Please choose a service.",svc_ph:"Choose a service",svc_aria:"Service needed",ph_message:"Tell me briefly what you need",sent_ok:"Thanks! Your message has been sent, I'll get back to you soon.",sent_err:"Something went wrong. Please try again in a moment.",cookienote:"This site uses only essential local storage to remember your language. No tracking cookies."},
    he:{skip:"דלג לתוכן",nav_about:"אודות",nav_work:"פרויקטים",nav_services:"שירותים",nav_contact:"צור קשר",
     eyebrow:"שי מרום &nbsp;&middot;&nbsp; <b>ארכיטקט פתרונות AI</b>",
     h1a:"אני שי,",h1b:"ואני בונה",h1c:"AI שעובד.",hl_build:"אני בונה",rot1:"סוכני AI",rot2:"אוטומציות",rot3:"אתרי AI",rot4:"תוצאות אמיתיות",sc1t:"סוכני AI",sc1c:"שמבצעים משימות רב-שלביות בעצמם.",sc2t:"אוטומציות",sc2c:"שמוחקות שעות של עבודה ידנית.",sc3t:"אתרים ב-AI",sc3c:"מהפרומפט ועד האוויר, במיתוג שלך.",gt:"AI גנרטיבי",gc:"תמונות ותוכן, במיתוג שלך.",pt:"הנדסת פרומפטים",pc:"מדויקים ובדוקים לתוצאה אמינה.",pe_tag:"נבדק ✓",sc4t:"תוצאות אמיתיות",sc4c:"כלים שמחזירים את ההשקעה.",ag_user:"מצא ומיין לידים חדשים.",ag_a1:"עובד על זה: סורק מקורות…",ag_tool:"מריץ אוטומציה",ag_a2:"בוצע: 42 לידים מוכנים.",
@@ -607,13 +663,13 @@
     serv2:"סוכני AI",serv2d:"סוכנים שמקבלים מטרה ומבצעים משימות רב-שלביות בעצמם.",
     serv3:"AI גנרטיבי",serv3d:"רתימת AI גנרטיבי ליצירת תוכן, תמונות וקופי מותאמים למותג שלך.",
     serv4:"הנדסת פרומפטים",serv4d:"כתיבה ובדיקה של פרומפטים שמפיקים תוצאות אמינות ועקביות.",
-    serv5:"בניית אתרים עם AI",serv5d:"אתרים ודפי נחיתה מהירים ומודרניים עם AI, מהפרומפט ועד העלייה לאוויר.",
+    serv5:"בניית אתרים עם AI",serv6:"אחר",serv5d:"אתרים ודפי נחיתה מהירים ומודרניים עם AI, מהפרומפט ועד העלייה לאוויר.",
     cont_k:"צור קשר",cont_h:"בואו נעבוד יחד",cont_p:"השאירו פרטים ואחזור אליכם.",
     ph_name:"שם מלא",ph_email:"אימייל",ph_phone:"טלפון (לא חובה)",cont_send:"שליחה",
     consent:"אני מסכים/ה שייצרו איתי קשר ושפרטיי יעובדו למטרה זו.",
     privnote:"הפרטים משמשים אך ורק כדי לחזור אליך ואינם משותפים או נמכרים לעולם.",
     foot_k:"צור קשר",foot_h:"בואו נדבר.",
-    about_p:"אחרי שנים של ניסיון במכירות בינלאומיות, בשירות לקוחות ובהובלת צוותים (כולל אחריות על בסיס לקוחות של יותר מ-250,000), עברתי לתחום ה-AI. כיום אני כותב פרומפטים, מפתח סוכנים ואוטומציות ללא קוד ומבוססי קוד ומשתמש ב-AI גנרטיבי לבניית דפי נחיתה ואתרים שלמים, מהפרומפט ועד לפרסום. אני הופך עבודה רפיטטיבית ואיטית לפתרון אמין ומדויק, מתוך הבנה מוחלטת ואיכפתיות לצרכים של הלקוחות שלי.",p1_p:"כלי מבוסס דפדפן שקולט קובץ שכר (Excel/CSV) ומאמת עבור כל עובד את ההפרשות לפנסיה, קרן השתלמות, פיצויים וביטוח לאומי מול חוקי העבודה בישראל. הכלי מסמן כל חריגה מהחוק ומפיק דוח בקרה חודשי עם גרפים והופך בדיקה ידנית ואיטית לבדיקה מהירה ואמינה.",p2_p:"סוכן AI אוטומטי שמאתר ומסנן לידים אורגניים מקצה לקצה. הוא אוסף לידים פוטנציאליים ממקורות מקוונים, מעשיר ומדרג כל אחד לפי רלוונטיות והתאמה ומספק רשימה נקייה ומוכנה ליצירת קשר, במקום שעות של איתור ידני.",p3_p:"סדרת דפי נחיתה וחומרי קמפיין לרשתות שנוצרו מקצה לקצה עם AI גנרטיבי. כתבתי וליטשתי את הפרומפטים, יצרתי את התמונות והפריסות עם Gemini ו-Nano Banana ועיצבתי שפה חזותית עקבית לכל הסט. גללו בין הדפים ולחצו על כל אחד כדי לפתוח אותו בגודל מלא.",copyright:"© 2026 שי מרום. כל הזכויות שמורות.",pp_h:"מדיניות פרטיות",privlink:"מדיניות פרטיות",pp_body:"<p><strong>עודכן לאחרונה: 2026.</strong></p><p>אתר זה הוא תיק העבודות המקצועי של שי מרום, שבו אני מציג את עבודותיי ומציע שירותי AI לעסקים. מדיניות זו מסבירה איזה מידע נאסף וכיצד נעשה בו שימוש.</p><p><strong>איזה מידע נאסף.</strong> אם תשתמשו בטופס יצירת הקשר, ייאסף השם, כתובת האימייל ומספר הטלפון שתמסרו. לא נאסף מידע אחר עליכם ובאתר אין כלי ניתוח או מעקב פרסומי.</p><p><strong>למה.</strong> הפרטים משמשים אך ורק כדי להשיב לפנייתכם בנוגע לעבודותיי או לשירותיי ולחזור אליכם ואינם נמכרים, מושכרים או משותפים עם צדדים שלישיים לצרכי שיווק.</p><p><strong>כיצד המידע מטופל.</strong> הטפסים נשלחים לאימייל שלי דרך שירות העברת טפסים (FormSubmit) ונשמרים בתיבת האימייל שלי.</p><p><strong>עוגיות ואחסון.</strong> האתר משתמש רק באחסון מקומי חיוני כדי לזכור את העדפת השפה. אין עוגיות מעקב או פרסום.</p><p><strong>הזכויות שלכם.</strong> תוכלו לבקש בכל עת לעיין בפרטים שמסרתם, לתקנם או למחוק אותם. פשוט כתבו לי ואטפל בכך.</p><p><strong>גופנים.</strong> האתר טוען גופנים משירות Google Fonts ולכן Google מקבלת את כתובת ה-IP שלכם בעת טעינת העמוד. לא משותף מידע אחר עם Google.</p><p><strong>יצירת קשר.</strong> השתמשו בטופס יצירת הקשר באתר.</p>",a11ynote:"נגישות: האתר נבנה לפי עקרונות הנגישות (WCAG).",hackeru:"השלמתי את קורס ארכיטקט פתרונות AI ב-HackerU ומחזיק בתעודה.",req_field:"יש למלא שדה זה.",req_check:"יש לסמן את התיבה כדי להמשיך.",req_email:"יש להזין כתובת אימייל תקינה.",req_service:"יש לבחור שירות.",svc_ph:"בחרו שירות",svc_aria:"השירות הנדרש",ph_message:"כתבו בקצרה מה אתם צריכים",sent_ok:"תודה! ההודעה נשלחה ואחזור אליכם בהקדם.",sent_err:"משהו השתבש. נסו שוב בעוד רגע.",cookienote:"האתר משתמש רק באחסון מקומי חיוני כדי לזכור את השפה. אין קובצי מעקב."}
+    about_p:"אחרי שנים של ניסיון במכירות בינלאומיות, בשירות לקוחות ובהובלת צוותים (כולל אחריות על בסיס לקוחות של יותר מ-250,000), עברתי לתחום ה-AI. כיום אני כותב פרומפטים, מפתח סוכנים ואוטומציות ללא קוד ומבוססי קוד ומשתמש ב-AI גנרטיבי לבניית דפי נחיתה ואתרים שלמים, מהפרומפט ועד לפרסום. אני הופך עבודה רפיטטיבית ואיטית לפתרון אמין ומדויק, מתוך הבנה מוחלטת ואיכפתיות לצרכים של הלקוחות שלי.",p1_p:"כלי מבוסס דפדפן שקולט קובץ שכר (Excel/CSV) ומאמת עבור כל עובד את ההפרשות לפנסיה, קרן השתלמות, פיצויים וביטוח לאומי מול חוקי העבודה בישראל. הכלי מסמן כל חריגה מהחוק ומפיק דוח בקרה חודשי עם גרפים והופך בדיקה ידנית ואיטית לבדיקה מהירה ואמינה.",p2_p:"סוכן AI אוטומטי שמאתר ומסנן לידים אורגניים מקצה לקצה. הוא אוסף לידים פוטנציאליים ממקורות מקוונים, מעשיר ומדרג כל אחד לפי רלוונטיות והתאמה ומספק רשימה נקייה ומוכנה ליצירת קשר, במקום שעות של איתור ידני.",p3_p:"סדרת דפי נחיתה וחומרי קמפיין לרשתות שנוצרו מקצה לקצה עם AI גנרטיבי. כתבתי וליטשתי את הפרומפטים, יצרתי את התמונות והפריסות עם Gemini ו-Nano Banana ועיצבתי שפה חזותית עקבית לכל הסט. גללו בין הדפים ולחצו על כל אחד כדי לפתוח אותו בגודל מלא.",copyright:"© 2026 שי מרום. כל הזכויות שמורות.",pp_h:"מדיניות פרטיות",privlink:"מדיניות פרטיות",pp_body:"<p><strong>עודכן לאחרונה: 2026.</strong></p><p>אתר זה הוא תיק העבודות המקצועי של שי מרום, שבו אני מציג את עבודותיי ומציע שירותי AI לעסקים. מדיניות זו מסבירה איזה מידע נאסף וכיצד נעשה בו שימוש.</p><p><strong>איזה מידע נאסף.</strong> אם תשתמשו בטופס יצירת הקשר, ייאסף השם, כתובת האימייל ומספר הטלפון שתמסרו. לא נאסף מידע אחר עליכם ובאתר אין כלי ניתוח או מעקב פרסומי.</p><p><strong>למה.</strong> הפרטים משמשים אך ורק כדי להשיב לפנייתכם בנוגע לעבודותיי או לשירותיי ולחזור אליכם ואינם נמכרים, מושכרים או משותפים עם צדדים שלישיים לצרכי שיווק.</p><p><strong>כיצד המידע מטופל.</strong> הטפסים נשלחים לאימייל שלי דרך שירות העברת טפסים (FormSubmit) ונשמרים בתיבת האימייל שלי.</p><p><strong>עוגיות ואחסון.</strong> האתר משתמש רק באחסון מקומי חיוני כדי לזכור את העדפת השפה. אין עוגיות מעקב או פרסום.</p><p><strong>הזכויות שלכם.</strong> תוכלו לבקש בכל עת לעיין בפרטים שמסרתם, לתקנם או למחוק אותם. פשוט כתבו לי ואטפל בכך.</p><p><strong>גופנים.</strong> האתר טוען גופנים משירות Google Fonts ולכן Google מקבלת את כתובת ה-IP שלכם בעת טעינת העמוד. לא משותף מידע אחר עם Google.</p><p><strong>יצירת קשר.</strong> השתמשו בטופס יצירת הקשר באתר.</p>",a11ynote:"נגישות: האתר נבנה לפי עקרונות הנגישות (WCAG).",a11ylink:"הצהרת נגישות",a11y_h:"הצהרת נגישות",a11y_body:"<p><strong>עודכן לאחרונה: ספטמבר 2026.</strong></p><p>אני שואף שהאתר יהיה נגיש ושמיש לכולם, לרבות אנשים עם מוגבלות, ופועל באופן שוטף לשמור על נגישותו ולשפרו לאורך זמן.</p><p><strong>התקן.</strong> האתר נבנה בהתאם להנחיות הנגישות WCAG 2.1 ברמה AA, המהוות את הבסיס לתקן הישראלי ת״י 5568.</p><p><strong>מה נעשה.</strong> האתר משתמש במבנה HTML סמנטי וכותרות, קישור דילוג לתוכן, טקסט חלופי לתמונות, שדות טופס מתויגים, ניווט במקלדת, ניגודיות צבעים ברורה, מעבר בין עברית לאנגלית, והוא מכבד את הגדרת הפחתת האנימציות בדפדפן עבור גולשים המעדיפים פחות תנועה.</p><p><strong>מגבלות ידועות.</strong> חלק מהתכנים מסתמכים על JavaScript וחלק מתמונות ה-AI הן דקורטיביות. אני פועל לצמצם כל פער שמתגלה.</p><p><strong>נתקלתם בבעיה?</strong> אם חלק כלשהו באתר קשה לגישה, אשמח שתעדכנו אותי ואתקן זאת בהקדם האפשרי. ניתן ליצור קשר דרך טופס יצירת הקשר באתר.</p><p><strong>רכז הנגישות:</strong> שי מרום.</p>",a11y_w_open:"תפריט נגישות",a11y_w_title:"נגישות",a11y_w_bigger:"הגדלת טקסט",a11y_w_smaller:"הקטנת טקסט",a11y_w_contrast:"ניגודיות גבוהה",a11y_w_links:"הדגשת קישורים",a11y_w_readable:"גופן קריא",a11y_w_motion:"עצירת תנועה",a11y_w_reset:"איפוס",hackeru:"השלמתי את קורס ארכיטקט פתרונות AI ב-HackerU ומחזיק בתעודה.",req_field:"יש למלא שדה זה.",req_check:"יש לסמן את התיבה כדי להמשיך.",req_email:"יש להזין כתובת אימייל תקינה.",req_service:"יש לבחור שירות.",svc_ph:"בחרו שירות",svc_aria:"השירות הנדרש",ph_message:"כתבו בקצרה מה אתם צריכים",sent_ok:"תודה! ההודעה נשלחה ואחזור אליכם בהקדם.",sent_err:"משהו השתבש. נסו שוב בעוד רגע.",cookienote:"האתר משתמש רק באחסון מקומי חיוני כדי לזכור את השפה. אין קובצי מעקב."}
   };
   function applyLang(l){
     const d=I18N[l]||I18N.en;
@@ -640,12 +696,66 @@
     });
   })();
   (function(){
-    const pm=document.getElementById('privacy'), op=document.getElementById('privacy-open');
-    if(!pm) return; const close=()=>pm.classList.remove('open');
-    if(op) op.addEventListener('click',e=>{e.preventDefault();pm.classList.add('open');});
-    pm.addEventListener('click',e=>{if(e.target===pm) close();});
-    const x=pm.querySelector('.modal-x'); if(x) x.addEventListener('click',close);
-    document.addEventListener('keydown',e=>{if(e.key==='Escape') close();});
+    function wire(modalId, openId){
+      const pm=document.getElementById(modalId), op=document.getElementById(openId);
+      if(!pm) return; const close=()=>pm.classList.remove('open');
+      if(op) op.addEventListener('click',e=>{e.preventDefault();pm.classList.add('open');});
+      pm.addEventListener('click',e=>{if(e.target===pm) close();});
+      const x=pm.querySelector('.modal-x'); if(x) x.addEventListener('click',close);
+    }
+    wire('privacy','privacy-open');
+    wire('accessibility','accessibility-open');
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));}});
+  })();
+  (function(){
+    var fab=document.getElementById('a11yFab'), panel=document.getElementById('a11yPanel');
+    if(!fab||!panel) return;
+    var main=document.querySelector('main');
+    var st={font:0,contrast:false,links:false,readable:false,motion:false};
+    try{ var s=localStorage.getItem('a11y_prefs'); if(s) st=Object.assign(st,JSON.parse(s)); }catch(e){}
+    function persist(){ try{ localStorage.setItem('a11y_prefs',JSON.stringify(st)); }catch(e){} }
+    function setActive(id,on){ var el=document.getElementById(id); if(el) el.classList.toggle('active',!!on); }
+    var lastZoom=null;
+    function apply(){
+      var z=st.font? (1+st.font*0.12).toFixed(2) : '';
+      if(main) main.style.zoom=z;
+      if(z!==lastZoom){ lastZoom=z; setTimeout(function(){ if(window.__flowRefit) window.__flowRefit(); },0); }
+      window.__flowPaused=st.motion;
+      document.body.classList.toggle('a11y-contrast',st.contrast);
+      document.body.classList.toggle('a11y-links',st.links);
+      document.body.classList.toggle('a11y-readable',st.readable);
+      document.body.classList.toggle('a11y-nomotion',st.motion);
+      setActive('a11yContrast',st.contrast); setActive('a11yLinks',st.links);
+      setActive('a11yReadable',st.readable); setActive('a11yMotion',st.motion);
+      setActive('a11yBigger',st.font>0);
+    }
+    function placeFab(x,y){ var m=6, w=fab.offsetWidth||58, hh=fab.offsetHeight||58;
+      x=Math.max(m,Math.min(x,window.innerWidth-w-m)); y=Math.max(m,Math.min(y,window.innerHeight-hh-m));
+      fab.style.left=x+'px'; fab.style.top=y+'px'; fab.style.right='auto'; fab.style.bottom='auto'; }
+    function positionPanel(){ var r=fab.getBoundingClientRect(), pw=panel.offsetWidth||252, ph=panel.offsetHeight||260, gap=12, m=8;
+      var left=r.left; if(left+pw>window.innerWidth-m) left=window.innerWidth-pw-m; if(left<m) left=m;
+      var top=r.top-ph-gap; if(top<m) top=r.bottom+gap; if(top+ph>window.innerHeight-m) top=Math.max(m,window.innerHeight-ph-m);
+      panel.style.left=left+'px'; panel.style.top=top+'px'; panel.style.right='auto'; panel.style.bottom='auto'; }
+    function openP(){ panel.classList.add('open'); positionPanel(); fab.setAttribute('aria-expanded','true'); }
+    function closeP(){ panel.classList.remove('open'); fab.setAttribute('aria-expanded','false'); }
+    function toggleP(){ if(panel.classList.contains('open')) closeP(); else openP(); }
+    try{ var pp=JSON.parse(localStorage.getItem('a11y_fabpos')||'null'); if(pp) placeFab(pp.x,pp.y); }catch(e){}
+    var dragging=false, moved=false, sx=0, sy=0, ox=0, oy=0;
+    fab.addEventListener('pointerdown',function(e){ dragging=true; moved=false; var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; try{ fab.setPointerCapture(e.pointerId); }catch(err){} e.preventDefault(); });
+    fab.addEventListener('pointermove',function(e){ if(!dragging) return; var dx=e.clientX-sx, dy=e.clientY-sy; if(!moved && (Math.abs(dx)>4||Math.abs(dy)>4)){ moved=true; if(panel.classList.contains('open')) closeP(); } if(moved) placeFab(ox+dx,oy+dy); });
+    fab.addEventListener('pointerup',function(e){ if(!dragging) return; dragging=false; try{ fab.releasePointerCapture(e.pointerId); }catch(err){} if(moved){ var r=fab.getBoundingClientRect(); try{ localStorage.setItem('a11y_fabpos',JSON.stringify({x:r.left,y:r.top})); }catch(err){} } else { toggleP(); } });
+    fab.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleP(); } });
+    document.addEventListener('click',function(e){ if(panel.classList.contains('open')&&!panel.contains(e.target)&&!fab.contains(e.target)) closeP(); });
+    window.addEventListener('resize',function(){ var r=fab.getBoundingClientRect(); placeFab(r.left,r.top); if(panel.classList.contains('open')) positionPanel(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&panel.classList.contains('open')) closeP(); });
+    document.getElementById('a11yBigger').addEventListener('click',function(){ st.font=Math.min(4,st.font+1); persist(); apply(); });
+    document.getElementById('a11ySmaller').addEventListener('click',function(){ st.font=Math.max(0,st.font-1); persist(); apply(); });
+    document.getElementById('a11yContrast').addEventListener('click',function(){ st.contrast=!st.contrast; persist(); apply(); });
+    document.getElementById('a11yLinks').addEventListener('click',function(){ st.links=!st.links; persist(); apply(); });
+    document.getElementById('a11yReadable').addEventListener('click',function(){ st.readable=!st.readable; persist(); apply(); });
+    document.getElementById('a11yMotion').addEventListener('click',function(){ st.motion=!st.motion; persist(); apply(); });
+    document.getElementById('a11yReset').addEventListener('click',function(){ st={font:0,contrast:false,links:false,readable:false,motion:false}; persist(); apply(); });
+    apply();
   })();
   (function(){
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -657,8 +767,7 @@
     const top=el=>el.getBoundingClientRect().top+window.scrollY;
     let mode='snap', lastW=0, streak=0, cooling=false, idle;
     window.addEventListener('wheel',e=>{
-      const pm=document.getElementById('privacy');
-      if(pm && pm.classList.contains('open')) return;          // let modal scroll
+      if(document.querySelector('.modal.open')) return;          // let any open modal scroll
       const lp=e.target.closest('.lp-scroller');
       if(lp){ const aT=lp.scrollTop<=0, aB=Math.ceil(lp.scrollTop+lp.clientHeight)>=lp.scrollHeight;
         if((e.deltaY>0&&!aB)||(e.deltaY<0&&!aT)) return; }      // let gallery scroll
@@ -758,6 +867,7 @@
     function init(){ size(); const n=Math.min(Math.floor(w*h/3200), (window.innerWidth<760?170:560)); parts=[]; for(let i=0;i<n;i++) parts.push({x:Math.random()*w,y:Math.random()*h,s:.5+Math.random()*1.25}); }
     function ang(x,y){ return (Math.sin(x*0.0016+t)+Math.cos(y*0.0019-t*0.8))*1.7; }
     function frame(){
+      if(window.__flowPaused){ requestAnimationFrame(frame); return; }
       ctx.fillStyle='rgba(10,10,11,0.14)'; ctx.fillRect(0,0,w,h);
       ctx.globalCompositeOperation='lighter';
       for(const p of parts){
@@ -774,6 +884,7 @@
     hero.addEventListener('mousemove',function(e){ const r=hero.getBoundingClientRect(); mx=e.clientX-r.left; my=e.clientY-r.top; });
     hero.addEventListener('mouseleave',function(){ mx=-999; my=-999; });
     let rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(init,200); });
+    window.__flowRefit=function(){ clearTimeout(rt); init(); };
     init(); frame();
   })();
   (function(){
