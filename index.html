@@ -964,15 +964,16 @@
   })();
 
   (function(){
-    var map={main:'', about:'about', work:'work', p2:'work', p3:'work', p4:'work', services:'services', contact:'contact'};
     var links={};
     document.querySelectorAll('.navlinks a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)]=a; });
-    var secs=Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
-    if(!secs.length) return;
-    function setActive(navId){ for(var k in links){ if(links[k]) links[k].classList.remove('active'); } if(links[navId]) links[navId].classList.add('active'); }
+    var pairs=[['header.hero',''],['#about','about'],['#work','work'],['#p2','work'],['#p3','work'],['#p4','work'],['#services','services'],['#contact','contact']];
+    var items=[];
+    pairs.forEach(function(pr){ var el=document.querySelector(pr[0]); if(el){ el.setAttribute('data-nav',pr[1]); items.push(el); } });
+    if(!items.length) return;
+    function setActive(navId){ for(var k in links){ if(links[k]) links[k].classList.remove('active'); } if(navId && links[navId]) links[navId].classList.add('active'); }
     if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ setActive(map[e.target.id]); } }); },{rootMargin:'-45% 0px -45% 0px', threshold:0});
-      secs.forEach(function(s){ io.observe(s); });
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ setActive(e.target.getAttribute('data-nav')); } }); },{rootMargin:'-45% 0px -45% 0px', threshold:0});
+      items.forEach(function(s){ io.observe(s); });
     }
   })();
 </script>
