@@ -417,7 +417,7 @@
   .siteframe-view{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#fff;pointer-events:none}
   .siteframe-scale{position:absolute;top:0;left:0;transform-origin:top left}
   .siteframe-if{width:1280px;height:800px;border:0;display:block}
-  .sf-fs{background:none;border:0;color:#ff7a3d;font-weight:700;font-size:14px;cursor:pointer;font-family:var(--grotesk);letter-spacing:.3px;padding:5px 12px;border-radius:8px}
+  .sf-fs{background:none;border:0;color:#ff7a3d;font-weight:700;font-size:14px;cursor:pointer;font-family:var(--grotesk);letter-spacing:.3px;padding:5px 12px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center}
   .sf-fs:hover{color:#ff9a5c;text-decoration:underline}
   .sf-close{display:none;background:none;border:0;color:#ff7a3d;font-weight:700;font-size:14px;font-family:var(--grotesk);letter-spacing:.3px;cursor:pointer;padding:5px 12px;border-radius:8px}
   .sf-close:hover{color:#ff9a5c;text-decoration:underline}
@@ -486,7 +486,7 @@
       <a class="btn primary sf-open" href="nof-acher-site.html" target="_blank" rel="noopener" data-i18n="p4_view">View full site</a>
     </div>
     <div class="reveal"><div class="siteframe">
-      <div class="siteframe-bar"><button class="sf-fs" type="button" data-i18n="p4_full">Click to view website in full</button><button class="sf-close" type="button" data-i18n="p4_exit">Exit full screen</button></div>
+      <div class="siteframe-bar"><a class="sf-fs" href="nof-acher-site.html" target="_blank" rel="noopener" data-i18n="p4_full">Click to view website in full</a><button class="sf-close" type="button" data-i18n="p4_exit">Exit full screen</button></div>
       <div class="siteframe-view"><div class="siteframe-scale"><iframe class="siteframe-if" src="nof-acher-site.html" title="Nof Acher website live preview" loading="lazy" tabindex="-1"></iframe></div></div>
     </div></div>
   </div><div class="proj-expand-wrap"><button id="proj-toggle" class="proj-expand" type="button" aria-expanded="false" data-i18n="proj_show">Expand to view more projects</button><div class="proj-scrollcue" aria-hidden="true"><span data-i18n="scroll">Scroll</span><span class="psc-arrow">↓</span></div></div></div>
@@ -948,12 +948,13 @@
     var view=document.querySelector('.siteframe-view'), scale=document.querySelector('.siteframe-scale');
     if(!view||!scale) return;
     var BASE=1280, frame=document.querySelector('.siteframe'), openBtn=document.querySelector('.sf-fs'), closeBtn=document.querySelector('.sf-close'), lastW=0;
-    function fit(){ if(frame&&frame.classList.contains('fs')) return; var w=view.clientWidth; if(!w||Math.abs(w-lastW)<1) return; lastW=w; scale.style.transform='scale('+(w/BASE)+')'; }
+    function fit(){ if(frame&&frame.classList.contains('fs')) return; var w=view.clientWidth; if(!w||Math.abs(w-lastW)<1) return; lastW=w; scale.style.transform='scale('+(w/BASE).toFixed(4)+')'; }
     window.__sfFit=fit;
     var ifr=view.querySelector('.siteframe-if');
     function deckEl(){ var d=ifr&&ifr.contentDocument; return d&&d.getElementById('deck'); }
+    function freezePreview(){ try{ var d=ifr&&ifr.contentDocument; if(!d) return; var deck=d.getElementById('deck'); if(deck){ deck.style.scrollSnapType='none'; deck.style.overflowY='hidden'; deck.scrollTop=0; } if(!d.getElementById('sf-freeze')){ var s=d.createElement('style'); s.id='sf-freeze'; s.textContent='#deck{overflow:hidden !important;scroll-snap-type:none !important}.hero-slide{animation:none !important;transition:none !important;opacity:0 !important}.hero-slide:first-child{opacity:1 !important}'; (d.head||d.documentElement).appendChild(s); } }catch(e){} }
+    if(ifr){ ifr.addEventListener('load',freezePreview); setTimeout(freezePreview,500); setTimeout(freezePreview,1500); }
     function setFs(on){ if(!frame) return; frame.classList.toggle('fs',on); document.body.style.overflow=on?'hidden':''; var deck=deckEl(); if(deck){ deck.scrollTop=0; } if(!on){ lastW=0; fit(); } }
-    if(openBtn) openBtn.addEventListener('click',function(){ window.open('nof-acher-site.html','_blank','noopener'); });
     if(closeBtn) closeBtn.addEventListener('click',function(){ setFs(false); });
     document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&frame&&frame.classList.contains('fs')) setFs(false); });
     window.addEventListener('resize',fit);
@@ -963,14 +964,14 @@
   })();
 
   (function(){
-    var map={about:'about', work:'work', p2:'work', p3:'work', p4:'work', services:'services', contact:'contact'};
+    var map={main:'', about:'about', work:'work', p2:'work', p3:'work', p4:'work', services:'services', contact:'contact'};
     var links={};
     document.querySelectorAll('.navlinks a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)]=a; });
     var secs=Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
     if(!secs.length) return;
     function setActive(navId){ for(var k in links){ if(links[k]) links[k].classList.remove('active'); } if(links[navId]) links[navId].classList.add('active'); }
     if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var n=map[e.target.id]; if(n) setActive(n); } }); },{rootMargin:'-45% 0px -45% 0px', threshold:0});
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ setActive(map[e.target.id]); } }); },{rootMargin:'-45% 0px -45% 0px', threshold:0});
       secs.forEach(function(s){ io.observe(s); });
     }
   })();
